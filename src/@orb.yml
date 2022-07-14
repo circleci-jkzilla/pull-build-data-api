@@ -1,7 +1,7 @@
 version: 2.1
 
 description: >
-  Pull data from API and store build data nightly
+  Pulls pipeline, workflow, job and artifacts data from API and stores build data nightly in an S3 bucket
 # What will your orb allow users to accomplish?
 # Descriptions should be short, simple, and informative.
 
