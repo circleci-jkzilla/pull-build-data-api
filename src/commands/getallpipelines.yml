@@ -5,6 +5,4 @@ steps:
   - run:
       name: call get all pipelines api
       command: |
-        mkdir /tmp
         <<include(scripts/getallpipelines.sh)>>
-        # bash (scripts/getallpipelines.sh not sure if we need this
