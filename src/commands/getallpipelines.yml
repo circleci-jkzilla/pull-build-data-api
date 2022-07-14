@@ -4,5 +4,4 @@ description: >
 steps:
   - run:
       name: call get all pipelines api
-      command: |
-        <<include(scripts/getallpipelines.sh)>>
+      command: <<include(scripts/getallpipelines.sh)>>
