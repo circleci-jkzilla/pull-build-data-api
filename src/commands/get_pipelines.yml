@@ -1,0 +1,8 @@
+steps:
+  - run:
+    command: |
+      PIPELINE_IDS=$(curl --request GET \
+      --url https://circleci.com/api/v2/project/gh/circleci-jkzilla/pull-build-data-api/pipeline?branch=$CIRCLE_BRANCH \
+      --header 'authorization: Basic $CIRCLE_TOKEN' | jq -r '.items[].id') 
+       echo "export PIPELINE_IDS=$PIPELINE_IDS" >> $BASH_ENV
+       echo $PIPELINE_IDS

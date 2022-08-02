@@ -1,0 +1,6 @@
+steps:
+  - run:
+    command: |
+        curl --request GET \
+        --url 'https://circleci.com/api/v2/insights/time-series/gh/circleci-jkzilla/pull-build-data-api/workflows/lint-pack/jobs?branch=jkg/orb-dev&granularity=daily&start-date=2022-07-15T13:26:29Z&end-date=2022-08-01T13:26:29Z' \
+        --header 'authorization: Basic 92df2046ec3c5ecc8aa200dcb155d200f274974a'   

@@ -1,0 +1,31 @@
+steps:
+  - run:
+    command: |
+      for pipelineee in $(echo $PIPELINE_IDS) ; do
+        WORKFLOW_IDS=$(curl --request GET \
+        --url 'https://circleci.com/api/v2/pipeline/'${pipelineee}'/workflow' \
+        --header 'authorization: Basic $CIRCLE_TOKEN' | jq -r '.items[].id') 
+
+        for workflow in $(echo $WORKFLOW_IDS) ; do
+            JOB_NUMBERS=$(curl --request GET \
+            --url https://circleci.com/api/v2/workflow/${workflow}/job \
+            --header 'authorization: Basic $CIRCLE_TOKEN' | jq -r '.items[].job_number')
+
+            for job in $(echo $JOB_NUMBERS) ; do
+                curl --request GET \
+                --url https://circleci.com/api/v2/project/gh/circleci-jkzilla/pull-build-data-api/job/${job} \
+                --header 'authorization: Basic $CIRCLE_TOKEN' 
+
+                curl --request GET \
+                --url https://circleci.com/api/v2/project/gh/circleci-jkzilla/pull-build-data-api/${job}/artifacts \
+                --header 'authorization: Basic $CIRCLE_TOKEN'
+
+                curl --request GET \
+                --url https://circleci.com/api/v2/project/gh/circleci-jkzilla/pull-build-data-api/${job}/tests \
+                --header 'authorization: Basic $CIRCLE_TOKEN' 
+
+            done
+        
+         done
+        
+      done
